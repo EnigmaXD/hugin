@@ -1,0 +1,44 @@
+version: '3'
+services:
+    mongodb:
+        container_name: mongo
+        image: mongo:3.6.3
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=root
+            - MONGO_INITDB_ROOT_PASSWORD=passwd
+        volumes:
+            - '/etc/mongodb/mongod.conf:/etc/mongod.conf'
+            - '/etc/mongodb/db:/data/db'
+        ports:
+            - 'port:27017'
+        command:
+            - '-f'
+            - '/etc/mongod.conf'
+    redis:
+        container_name: redis
+        image: redis:4.0.9
+        volumes:
+            - '/etc/redis/redis.conf:/etc/redis/redis.conf'
+            - '/etc/redis/data/:/data/'
+        ports:
+            - 'port:6379'
+        command:
+            - '/etc/redis/redis.conf'
+    mysql:
+        container_name: mysql
+        image: 'mysql:5.7'
+        environment:
+            MYSQL_ROOT_PASSWORD: 1q2w3e4r
+        volumes:
+            - '/etc/mysql/my.cnf:/etc/my.cnf'
+            - '/etc/mysql/data:/var/lib/mysql'
+        ports:
+            - 'port:3306' 
+    tomcat:
+        image: tomcat:8
+        container_name: tomcat
+        volumes:
+            # - '/etc/tomcat/conf/server.xml:/usr/local/tomcat/webapps/conf/server.xml'
+            - '/etc/tomcat/webapps/:/usr/local/tomcat/webapps/'
+        ports:
+            - 'port:8080'
