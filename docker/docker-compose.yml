@@ -28,7 +28,7 @@ services:
         container_name: mysql
         image: 'mysql:5.7'
         environment:
-            MYSQL_ROOT_PASSWORD: 1q2w3e4r
+            MYSQL_ROOT_PASSWORD: passwd
         volumes:
             - '/etc/mysql/my.cnf:/etc/my.cnf'
             - '/etc/mysql/data:/var/lib/mysql'
@@ -42,3 +42,13 @@ services:
             - '/etc/tomcat/webapps/:/usr/local/tomcat/webapps/'
         ports:
             - 'port:8080'
+    postgresql:
+        image: postgres:11
+        container_name: postgresql
+        environment:
+            POSTGRES_USER: root
+            POSTGRES_PASSWORD: passwd
+        volumes:
+            - '/etc/postgresql/data/:/var/lib/postgresql/data/'
+        ports:
+            - '5432:5432'
